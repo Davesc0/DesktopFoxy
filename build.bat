@@ -1,49 +1,25 @@
 @echo off
-echo ====================================
-echo DesktopFoxy EXE Builder
-echo ====================================
-echo.
+setlocal
+cd /d "%~dp0"
+set "PY=venv\Scripts\python.exe"
 
-REM Check if venv exists
-if not exist "venv\" (
-    echo [1/4] Creating virtual environment...
-    python -m venv venv
-    echo.
-) else (
-    echo [1/4] Virtual environment already exists
-    echo.
+if not exist "%PY%" (
+    echo Creating virtual environment...
+    python -m venv venv || goto :fail
 )
 
-REM Activate venv
-echo [2/4] Activating virtual environment...
-call venv\Scripts\activate.bat
-echo.
+echo Installing dependencies...
+"%PY%" -m pip install -q --disable-pip-version-check -r requirements-build.txt || goto :fail
 
-REM Install dependencies
-echo [3/4] Installing dependencies...
-pip install -q PyQt6 Pillow pystray pyinstaller
-echo Dependencies installed!
-echo.
+echo Building...
+"%PY%" -m PyInstaller DesktopFoxy.spec --clean --noconfirm --log-level WARN || goto :fail
 
-REM Build EXE
-echo [4/4] Building EXE with PyInstaller...
-pyinstaller DesktopFoxy_FIXED.spec --clean
 echo.
+echo Done: dist\DesktopFoxy.exe
+exit /b 0
 
-if exist "dist\DesktopFoxy.exe" (
-    echo ====================================
-    echo BUILD SUCCESSFUL!
-    echo ====================================
-    echo.
-    echo Your EXE is ready: dist\DesktopFoxy.exe
-    echo.
-    echo Press any key to run the EXE...
-    pause > nul
-    start dist\DesktopFoxy.exe
-) else (
-    echo ====================================
-    echo BUILD FAILED!
-    echo ====================================
-    echo Please check the error messages above
-    pause
-)
+:fail
+echo.
+echo BUILD FAILED - see the errors above.
+pause
+exit /b 1
