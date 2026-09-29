@@ -1,24 +1,26 @@
 # Foxy Jumpscare
 
-A small Windows background application that randomly triggers a fullscreen Foxy jumpscare.
+A small Windows background app that randomly triggers a fullscreen Foxy jumpscare.
 
-Most jumpscare mods or tools are tied to a specific game or application.  
+Most jumpscare mods are tied to a specific game.
 This one is not.
 
-Foxy Jumpscare runs globally in the background, meaning that no matter what you are doing (gaming, coding, watching videos, or just sitting on the desktop) there is always a chance that a jumpscare will occur.
+Foxy runs globally in the background, so whatever you are doing (gaming, coding, watching videos, or just staring at the desktop), there is always a chance he shows up.
 
 ## Usage
 
-You only need to run the `.exe` from the `dist` folder.  
-*Everything else is for development.*
+Download `DesktopFoxy.exe` from the [Releases](https://github.com/Davesc0/DesktopFoxy/releases) page and run it. No install needed.
 
-All controls are available through the system tray icon, including a manual test trigger and configuration options.
+Everything is controlled from the tray icon.
+Settings are remembered between runs. The jumpscare never steals focus or blocks input: your game or typing keeps going underneath (you just might not).
+
+> Exclusive fullscreen games draw over everything, so Foxy can't appear over them. Borderless/windowed mode works.
 
 ## License
 
-Do whatever you want with it.  
+Do whatever you want with it.
 *Maybe you can make it even better.*
 
 ------
 
-<sub><em>I’m not entirely sure why you would do this to yourself, but… enjoy, I guess.</em></sub>
+<sub><em>I'm not entirely sure why you would do this to yourself, but… enjoy, I guess.</em></sub>
